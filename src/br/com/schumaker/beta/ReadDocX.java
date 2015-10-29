@@ -9,25 +9,33 @@ import java.io.File;
 import java.io.FileInputStream;
 import org.apache.poi.hwpf.HWPFDocument;
 import org.apache.poi.hwpf.extractor.WordExtractor;
+import org.apache.poi.xwpf.extractor.XWPFWordExtractor;
+import org.apache.poi.xwpf.usermodel.XWPFDocument;
 
 /**
  *
  * @author hudsonschumaker
  */
-public class NewClass {
+public class ReadDocX {
 
     public static void main(String[] args) {
         try {
 
-            File file = new File("/users/hudsonschumaker/downloads/Guisi01206us - Jira Guide for P3 PECB enhancement requests.doc");
+            File file = new File("/users/hudsonschumaker/downloads/PROCESSO - BPCS - Dar baixa ao CDR.docx");
             FileInputStream fis = new FileInputStream(file.getAbsolutePath());
-            HWPFDocument doc = new HWPFDocument(fis);
-            WordExtractor extractor = new WordExtractor(doc);
-            for (String rawText : extractor.getParagraphText()) {
+            XWPFDocument doc = new XWPFDocument(fis);
+            XWPFWordExtractor ex = new XWPFWordExtractor(doc);
+           
+            
+            for (String rawText : ex.) {
                 String text = extractor.stripFields(rawText);
                 if(text.length()>10)
                 System.out.println(text.trim());
             }
+
+//                if(text.length()>10)
+            System.out.println(text.trim());
+
         } catch (Exception exep) {
         }
     }
