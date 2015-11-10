@@ -1,4 +1,4 @@
-package br.com.schumaker.beta;
+package br.com.schumaker.beta.doc;
 
 import org.apache.poi.poifs.filesystem.*;
 import org.apache.poi.hpsf.DocumentSummaryInformation;

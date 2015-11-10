@@ -1,4 +1,4 @@
-package br.com.schumaker.beta;
+package br.com.schumaker.beta.doc;
 
 import java.io.File;
 import java.io.FileInputStream;
