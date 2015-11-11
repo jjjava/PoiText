@@ -1,5 +1,6 @@
 package br.com.schumaker.beta.ppt;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -16,30 +17,39 @@ import org.apache.poi.xslf.usermodel.XSLFTextShape;
  */
 public class TestReadPptXFiles {
 
-    static XMLSlideShow ppt;
+    static XMLSlideShow pptx;
+
     public static void main(String[] args) {
-        String fileName = "/Volumes/swap/HStudio/Project S@murai/Temp/HStudio.pptx";
-        FileInputStream inputStream;
-        try {
-            inputStream = new FileInputStream(fileName);
-             ppt = new XMLSlideShow(inputStream);
-        } catch (FileNotFoundException e) {
-            System.err.println(e);
-            return;
+        File f = new File("/Volumes/swap/HStudio/Project S@murai/Temp/test/_ppt");
+        String names[] = f.list();
+        for (String n : names) {
+            FileInputStream inputStream = null;
+            try {
+                inputStream = new FileInputStream("/Volumes/swap/HStudio/Project S@murai/Temp/test/_ppt/"+n);
+                pptx = new XMLSlideShow(inputStream);
+                readPPTX(pptx);
+            } catch (FileNotFoundException ex) {
+                System.err.println(ex);
+            } catch (IOException ex) {
+                System.err.println(ex);
+            } finally {
+                try {
+                    if (inputStream != null) {
+                        inputStream.close();
+                    }
+                } catch (IOException ex) {
+                    System.err.println(ex);
+                }
+            }
         }
-        catch (IOException e) {
-            System.err.println(e);
-            return;
-        }
-        readPPT(ppt);
     }
 
-    public static void readPPT(XMLSlideShow ppt) {
-        CoreProperties props = ppt.getProperties().getCoreProperties();
+    public static void readPPTX(XMLSlideShow pptx) {
+        CoreProperties props = pptx.getProperties().getCoreProperties();
         String title = props.getTitle();
         System.out.println("Title: " + title);
 
-        for (XSLFSlide slide : ppt.getSlides()) {
+        for (XSLFSlide slide : pptx.getSlides()) {
             System.out.println("Starting slide...");
             List<XSLFShape> shapes = slide.getShapes();
             for (XSLFShape shape : shapes) {
